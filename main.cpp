@@ -10,6 +10,8 @@
 #define CLEAR "clear"
 #endif // _WIN32
 
+#define C_0 0
+
 void agregarPaquete();
 void eliminarPaquete();
 void listarPaquetes();
@@ -101,7 +103,7 @@ void eliminarPaquete()
 }
 void listarPaquetes()
 {
-    if(inventario.cantidadRegistros() > 0)
+    if(inventario.cantidadRegistros() > C_0)
     {
         cout << "PAQUETES REGISTRADOS" <<endl <<endl << inventario.mostrarPaquetes();
     }
