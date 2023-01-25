@@ -53,7 +53,7 @@ int main()
     return 0;
 }
 
-void inicializarPrograma(){setlocale(LC_ALL, "spanish"); cargarRegistroDePaquetes();}
+void inicializarPrograma(){setlocale(LC_CTYPE, "spanish"); cargarRegistroDePaquetes();}
 void pausa(){cout << "Presiona entrar para continuar..."; cin.get();}
 
 void agregarPaquete()
