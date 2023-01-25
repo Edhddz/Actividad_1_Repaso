@@ -14,6 +14,8 @@
 #define FILE_NAME "inventario.txt"
 #define DELIMITADOR_DE_CAMPOS '|'
 #define SEPARADOR_DE_REGISTROS '\n'
+#define C_0 0
+#define PRECISION 2
 
 class Nodo
 {
@@ -118,13 +120,13 @@ void Paqueteria::guardarRegistros()
     std::ofstream archivoInventario;
     Nodo* nodoTemporal = inicio;
 
-    if(totalRegistros > 0)
+    if(totalRegistros > C_0)
     {
         archivoInventario.open(FILE_NAME, std::ios::out);
         if(archivoInventario.is_open())
         {
             archivoInventario << totalRegistros << DELIMITADOR_DE_CAMPOS;
-            archivoInventario << std::fixed << std::setprecision(2);
+            archivoInventario << std::fixed << std::setprecision(PRECISION);
 
             while(nodoTemporal != NULL)
             {
@@ -160,13 +162,15 @@ void Paqueteria::recuperarRegistros()
             std::getline(archivoInventario, cadena);
             posicion = cadena.find_last_of(DELIMITADOR_DE_CAMPOS);
             subcadena = cadena.substr(posicion+1);
+            std::cout << subcadena <<std::endl;
             peso = std::stof(subcadena);
-            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, 0);
-            subcadena = cadena.substr(0, posicion);
+            std::cout << peso << std::endl;
+            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, C_0);
+            subcadena = cadena.substr(C_0, posicion);
             origen = subcadena;
             cadena = cadena.substr(posicion+1);
-            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, 0);
-            subcadena = cadena.substr(0, posicion);
+            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, C_0);
+            subcadena = cadena.substr(C_0, posicion);
             destino = subcadena;
 
             insertarInicio(id, origen, destino, peso);
