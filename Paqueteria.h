@@ -158,20 +158,19 @@ void Paqueteria::recuperarRegistros()
         archivoInventario >> cantidadRegsitros >> separador;
         for(int i = C_0; i<cantidadRegsitros; i++)
         {
-            archivoInventario >> id >> separador;
             std::getline(archivoInventario, cadena);
+            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, C_0);
+            subcadena = cadena.substr(C_0, posicion);
+            id = std::stoi(subcadena);
+            cadena = cadena.substr(posicion+1);
             posicion = cadena.find_last_of(DELIMITADOR_DE_CAMPOS);
             subcadena = cadena.substr(posicion+1);
-            std::cout << subcadena <<std::endl;
             peso = std::stof(subcadena);
-            std::cout << peso << std::endl;
+            cadena = cadena.substr(C_0, posicion);
             posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, C_0);
             subcadena = cadena.substr(C_0, posicion);
             origen = subcadena;
-            cadena = cadena.substr(posicion+1);
-            posicion = cadena.find_first_of(DELIMITADOR_DE_CAMPOS, C_0);
-            subcadena = cadena.substr(C_0, posicion);
-            destino = subcadena;
+            destino = cadena.substr(posicion+1);
 
             insertarInicio(id, origen, destino, peso);
         }
